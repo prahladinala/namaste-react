@@ -1,0 +1,33 @@
+{
+   "name": "react-parcel-tailwind-app",
+   "version": "1.0.0",
+   "description": "A React application using Parcel and Tailwind CSS.",
+  "main": "src/index.js",
+   "scripts": {
+      "start": "parcel src/index.html",
+      "build": "parcel build src/index.html"
+   },
+   "keywords": [
+    "react",
+    "typescript",
+    "parcel",
+    "tailwindcss",
+    "web"
+  ],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+   },
+   "devDependencies": {
+      "@types/react": "^18.3.5",
+      "@types/react-dom": "^18.3.0",
+      "autoprefixer": "^10.4.20",
+      "parcel": "^2.12.0",
+      "postcss": "^8.4.44",
+      "process": "^0.11.10",
+      "tailwindcss": "^3.4.10",
+      "typescript": "^5.5.4"
+   }
+}

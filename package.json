@@ -3,8 +3,12 @@
   "version": "1.0.3",
   "description": "a npm package to create a simple react app",
   "main": "index.js",
+  "bin": {
+    "namaste-react": "./bin/cli.js"
+  },
   "scripts": {
-    "start": "chmod +x index.js && node index.js"
+    "build": "echo 'No build step required'",
+    "prepare": "npm run build"
   },
   "author": "Prahlad Inala",
   "license": "MIT",
@@ -19,5 +23,10 @@
   "bugs": {
     "url": "https://github.com/prahladinala/namaste-react/issues"
   },
-  "homepage": "https://github.com/prahladinala/namaste-react#readme"
+  "homepage": "https://github.com/prahladinala/namaste-react#readme",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^10.2.0"
+  }
 }
