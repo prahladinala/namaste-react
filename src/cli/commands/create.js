@@ -39,6 +39,8 @@ const createCommand = async (projectName, options) => {
   // 2. Resolve Configuration
   let config = {};
 
+  const hasFlags = options.typescript || options.javascript || options.tailwind || options.css || options.scss || options.vite || options.parcel || options.router || options.zustand || options.redux || options.axios || options.eslint || options.vitest;
+
   if (options.preset) {
     if (presets[options.preset]) {
       config = { ...presets[options.preset] };
@@ -47,9 +49,30 @@ const createCommand = async (projectName, options) => {
       logger.error(`Preset "${options.preset}" not found. Available presets: ${Object.keys(presets).join(", ")}`);
       process.exit(1);
     }
-  } else if (options.yes) {
-    logger.info("Using default configuration.");
-    config = { ...presets.minimal };
+  } else if (hasFlags || options.yes) {
+    logger.info("Using configuration from CLI flags.");
+    config = { ...presets.minimal }; // Base defaults
+
+    if (options.typescript) config.language = "typescript";
+    if (options.javascript) config.language = "javascript";
+    
+    if (options.tailwind) config.styling = "tailwind";
+    if (options.scss) config.styling = "scss";
+    if (options.css) config.styling = "css";
+
+    if (options.vite) config.bundler = "vite";
+    if (options.parcel) config.bundler = "parcel";
+
+    if (options.router) config.router = true;
+
+    if (options.zustand) config.state = "zustand";
+    if (options.redux) config.state = "redux";
+
+    if (options.axios) config.api = "axios";
+
+    if (options.eslint) config.eslintPrettier = true;
+    if (options.vitest) config.testing = "vitest";
+
   } else {
     // Interactive mode
     config = await prompts.askAll(safeName);

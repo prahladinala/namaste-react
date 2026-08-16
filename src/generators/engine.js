@@ -82,13 +82,14 @@ const generate = async (config) => {
       spinner.start("Initializing Git repository...");
       try {
         await execPromise("git init", { cwd: targetPath });
-        await execPromise("git add .", { cwd: targetPath });
         
-        // Setup gitignore
+        // Setup gitignore BEFORE adding files!
         const gitignorePath = path.resolve(targetPath, ".gitignore");
         if (!(await fsUtils.fileExists(gitignorePath))) {
           await fsUtils.writeFile(gitignorePath, "node_modules\n.DS_Store\ndist\nbuild\n.env\n");
         }
+
+        await execPromise("git add .", { cwd: targetPath });
 
         spinner.succeed("Initialized Git repository");
       } catch (err) {

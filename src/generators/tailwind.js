@@ -54,7 +54,12 @@ module.exports = {
     await fsUtils.writeFile(path.resolve(targetPath, ".postcssrc"), parcelPostcss);
   }
 
-  await fsUtils.writeFile(path.resolve(targetPath, "src", "index.css"), cssContent);
+  const indexCssPath = path.resolve(targetPath, "src", "index.css");
+  let existingCss = "";
+  if (await fsUtils.fileExists(indexCssPath)) {
+    existingCss = await fsUtils.readFile(indexCssPath);
+  }
+  await fsUtils.writeFile(indexCssPath, cssContent + "\n" + existingCss);
 
   // Inject import into index file
   const ext = config.language === "typescript" ? "tsx" : "js";
